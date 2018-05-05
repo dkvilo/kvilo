@@ -38,12 +38,12 @@
 - add multiple config support
 
 # Screenshots
-![Init Command](https://raw.githubusercontent.com/dkvilo/kfr/master/screenshot/init.png)
+![Init Command](https://raw.githubusercontent.com/dkvilo/kvilo/master/Screenshot/init.png)
 
-![Set Variable](https://raw.githubusercontent.com/dkvilo/kfr/master/screenshot/set.png)
+![Set Variable](https://raw.githubusercontent.com/dkvilo/kvilo/master/Screenshot/set.png)
 
-![Get Value](https://raw.githubusercontent.com/dkvilo/kfr/master/screenshot/get.png)
+![Get Value](https://raw.githubusercontent.com/dkvilo/kvilo/master/Screenshot/get.png)
 
-![Valdiate Variable Value](https://raw.githubusercontent.com/dkvilo/kfr/master/screenshot/validate.png)
+![Valdiate Variable Value](https://raw.githubusercontent.com/dkvilo/kvilo/master/Screenshot/validate.png)
 
-![List Variables](https://raw.githubusercontent.com/dkvilo/kfr/master/screenshot/list.png)
+![List Variables](https://raw.githubusercontent.com/dkvilo/kvilo/master/Screenshot/list.png)
