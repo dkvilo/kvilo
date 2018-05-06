@@ -23,7 +23,7 @@
     $ kvilo get foo | xargs echo
 
     # validate variable: Command --validate <key> <value>
-    $ kvilo --validate foo bar
+    $ kvilo validate foo bar
 
     # Print available variables
     $ kvilo list

@@ -2,7 +2,7 @@ init:
 	mkdir build
 
 buildx:
-	gcc -w src/main.c -o build/kvilo
+	gcc -w src/*.c -o build/kvilo
 
 install:
 	chmod 711 build/kvilo && sudo cp build/kvilo /usr/bin

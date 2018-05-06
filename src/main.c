@@ -1,109 +1,77 @@
+/*
+* David Kvilora <datokviloria@gmail.com>
+*/
 #include <stdio.h>
 #include <stdlib.h>
-#include <time.h>
 #include <string.h>
 #include <unistd.h>
-#include <signal.h>
 
-#include "../include/c127.h"
 #include "../include/kvilo.h"
 
+#include "kvilo_set.h"
+#include "kvilo_init.h"
+#include "kvilo_read_config.h"
+#include "kvilo_get_config.h"
+#include "kvilo_validate.h"
+#include "kvilo_get.h"
+
 char config_path[80];
-char *config_file =  "/.kconfig";
-char answer[5];
+char *config_file =  "/.kvilo_master";
 
 int main(int argc, char const *argv[]) {
 
 	snprintf(config_path, sizeof config_path, getenv("HOME"));
-	time_t my_time;
-	time(&my_time);
 
 	if ( argc <= 1 ) {
-		create_error(0, "Missing Arguments: Type kvilo -h");
+		create_error(1, "Unknown args Type: kvilo -h\n");
 		return 1;
 	}
 
 	if (strcmp(argv[1], "init") == 0) {
-		FILE *fp = fopen(strcat(config_path, config_file), "w");
 
-		if (fp == NULL) {
-			create_error(0, "While Createing Config ...");
-			return 1;
+		if (argc == 3) {
+			if (strcmp(argv[2], "-f") == 0) {
+				kvilo_init(argv[2], config_path, config_file);
+			} else {
+				create_error(1, "Error: Unknown Flag for init: Did you mean -f ?\n");
+			}
+		} else {
+			kvilo_init(NULL, config_path, config_file);
 		}
 
-		create_message("Config was generated [OK]\n");
-		fclose(fp);
 	}
 
 	else if (strcmp(argv[1], "get") == 0) {
-		char *val = getConfig((char *)argv[2]);
-		printf("%s", val);
+		if (argc <= 2) {
+			create_error(1, "Error: Missing argument for get! Type:\t kvilo get <key>\n");
+			return 1;
+		}
+		kvilo_get(argv[2], config_path, config_file);
 	}
 
 	else if (strcmp(argv[1], "set") == 0) {
-		FILE *fp = fopen(strcat(config_path, config_file), "a");
-
-		if (fp == NULL) {
-			create_error(0, "While Updating Config ...");
-			return 1;
-		}
-
-		fprintf(fp, "%s\n", argv[2]);
-		fclose(fp);
+		kvilo_set(config_path, config_file, argv[2]);
 	}
 
-
-	else if (strcmp(argv[1], "list") == 0) {
-
-		char *key;
-		char *value;
-		char *search = "=";
-
-		FILE *fp = fopen(strcat(config_path, config_file), "r");
-
-		if (fp == NULL) {
-			create_error(0, "kconfig file not found! Type:\n\n\t[+] kvilo init \n\t[+] kvilo -i\n");
-			create_error(0, "Help: kvilo -h");
-			return 1;
-		}
-
-		char line[128];
-		unsigned short count_line = 0;
-
-		printf("File: %s/\n", config_path );
-		while (fgets(line, sizeof line, fp) != NULL) {
-			count_line++;
-			key = strtok(line, search);
-			value = strtok(NULL, search);
-			printf(" %d) %s = %s", count_line, key, value);
-		}
-
-		printf("\n");
-		fclose(fp);
+	else if (strcmp(argv[1], "show") == 0) {
+		kvilo_read_config(config_path, config_file);
 	}
 
-	else if ( strcmp(argv[1], "-v") == 0 || strcmp(argv[1], "--validate") == 0) {
+	else if ( strcmp(argv[1], "-v") == 0 || strcmp(argv[1], "validate") == 0) {
+		kvilo_validate(argc, (char *) getConfig((char *) argv[2], config_path, config_file), argv[3]);
+	}
 
-		if (argc <= 2) {
-			create_error(0, "Missing argument: kvilo --validate <key> <value>");
-			return 1;
-		}
-
-		char *username = (char *) getConfig((char *) argv[2]);
-
-		remove_from_string(username, '\n');
-
-		if (strcmp(username, argv[3]) == 0 ) {
-			printf("[+] Status: [OK]\n");
-		} else {
-			create_error(0, "[NOT_OK]");
-			return 1;
-		}
-
+	else if (strcmp(argv[1], "-h") == 0 || strcmp(argv[1], "help") == 0) {
+		printf(" Usage: kvilo <command> <arg> <flag>\n");
+		printf("\tkvilo set key=value\t\tStore variable in master collection\n");
+		printf("\tkvilo init\t\t\tGenerate [master] collection\n");
+		printf("\tkvilo get key\t\t\tGet variable value\n");
+		printf("\tkvilo validate key value\tValidate variable value\n");
+		printf("\tkvilo show\t\t\tLoad master collection and print\n");
 	}
 
 	 else {
-		create_error(0, "Unknown args Type: kvilo -h");
+		create_error(1, "Unknown args Type: kvilo -h\n");
 	}
 
 	return 0;
@@ -114,39 +82,6 @@ void create_message(const char *message) {
 }
 
 void create_error(unsigned short type, const char *message) {
-	if (type) printf("\n [x] Error: %s\n", message);
-	else printf("[x] Error: %s\n", message);
-}
-
-char *getConfig(char *target_key) {
-
-	FILE *fp = fopen(strcat(config_path, config_file), "r");
-
-	char *line[128];
-	char *search = "=";
-	char *token;
-	char *value;
-
-	while (fgets(line, sizeof line, fp) != NULL) {
-		token = strtok(line, search);
-		if (strcmp(target_key, token) == 0 )  {
-			value = strtok(NULL, search);
-			break;
-			fclose(fp);
-		}
-	}
-
-	return  value;
-}
-
-void remove_from_string(char* source, char target) {
-  char *i = source;
-  char *j = source;
-  while(*j != 0) {
-    *i = *j++;
-    if(*i != target) {
-      i++;
-		}
-  }
-  *i = 0;
+	if (type) printf(KVILO_RED"\n [x]%s %s\n", KVILO_RESET, message);
+	else printf(KVILO_RED" [x]%s %s\n", KVILO_RESET, message);
 }
