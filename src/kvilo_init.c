@@ -31,7 +31,7 @@ void create_coll(char *config_path, char *config_file) {
     create_error(1, "SYSError: While Createing Config ...\n");
     return 1;
   }
-  printf("\nMessage: Collection %s[master]%s generated successfully\n\n", KVILO_YELLOW, KVILO_RESET);
+  printf("\n [+] Collection %s[master]%s generated successfully\n\n", KVILO_YELLOW, KVILO_RESET);
   fclose(fp);
 
 }

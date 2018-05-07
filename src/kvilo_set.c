@@ -4,12 +4,15 @@
 #include <stdio.h>
 #include <string.h>
 
+#include "../include/colors.h"
+
 void kvilo_set(char *config_path, char *config_file, const char *var) {
 
   if (var != NULL) {
 
     char *line[128];
     char *token;
+    char *value;
     char *search = "=";
     char *cliKey;
     char res_var[100];
@@ -31,6 +34,7 @@ void kvilo_set(char *config_path, char *config_file, const char *var) {
     * Get Key form cli
     */
     cliKey = strtok(res_var, search);
+    value = strtok(NULL, search);
 
     while (fgets(line, sizeof line, fp) != NULL) {
       token = strtok(line, search);
@@ -40,8 +44,13 @@ void kvilo_set(char *config_path, char *config_file, const char *var) {
       }
     }
 
-    if (write) {
-      fprintf(fp, "%s\n", var);
+    if (value != NULL) {
+      if (write) {
+        fprintf(fp, "%s\n", var);
+      }
+    } else {
+      // create_error(1, "Error: Invalid Syntax!")
+      printf("\n %s[x]%s Error: invalid syntax %s`%s`%s\n\n\tValid: %sfoo=bar%s\n\n", KVILO_RED, KVILO_RESET, KVILO_RED, var, KVILO_RESET, KVILO_GREEN, KVILO_RESET);
     }
 
     fclose(fp);

@@ -14,6 +14,7 @@
 #include "kvilo_get_config.h"
 #include "kvilo_validate.h"
 #include "kvilo_get.h"
+#include "kvilo_help.h"
 
 char config_path[80];
 char *config_file =  "/.kvilo_master";
@@ -23,23 +24,21 @@ int main(int argc, char const *argv[]) {
 	snprintf(config_path, sizeof config_path, getenv("HOME"));
 
 	if ( argc <= 1 ) {
-		create_error(1, "Unknown args Type: kvilo -h\n");
+		kvilo_help();
 		return 1;
 	}
 
-	if (strcmp(argv[1], "init") == 0) {
-
-		if (argc == 3) {
-			if (strcmp(argv[2], "-f") == 0) {
-				kvilo_init(argv[2], config_path, config_file);
-			} else {
-				create_error(1, "Error: Unknown Flag for init: Did you mean -f ?\n");
-			}
-		} else {
-			kvilo_init(NULL, config_path, config_file);
-		}
-
-	}
+	if (strcmp(argv[1], "init") == 0 || strcmp(argv[1], "-i") == 0) {
+ 	 if (argc == 3) {
+ 		 if (strcmp(argv[2], "-f") == 0) {
+ 			 kvilo_init(argv[2], config_path, config_file);
+ 		 } else {
+ 			 create_error(1, "Error: Unknown Flag for init: Did you mean -f ?\n");
+ 		 }
+ 	 } else {
+ 		 kvilo_init(NULL, config_path, config_file);
+ 	 }
+  }
 
 	else if (strcmp(argv[1], "get") == 0) {
 		if (argc <= 2) {
@@ -58,16 +57,15 @@ int main(int argc, char const *argv[]) {
 	}
 
 	else if ( strcmp(argv[1], "-v") == 0 || strcmp(argv[1], "validate") == 0) {
-		kvilo_validate(argc, (char *) getConfig((char *) argv[2], config_path, config_file), argv[3]);
+		if (argc <= 3) {
+			create_error(1, "Error: Missing argument for get! Type:\t kvilo validate <key> <value>\n");
+			return 1;
+		}
+		kvilo_validate(argv[2], config_path, config_file, argv[3]);
 	}
 
 	else if (strcmp(argv[1], "-h") == 0 || strcmp(argv[1], "help") == 0) {
-		printf(" Usage: kvilo <command> <arg> <flag>\n");
-		printf("\tkvilo set key=value\t\tStore variable in master collection\n");
-		printf("\tkvilo init\t\t\tGenerate [master] collection\n");
-		printf("\tkvilo get key\t\t\tGet variable value\n");
-		printf("\tkvilo validate key value\tValidate variable value\n");
-		printf("\tkvilo show\t\t\tLoad master collection and print\n");
+		kvilo_help();
 	}
 
 	 else {
