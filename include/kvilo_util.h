@@ -4,8 +4,6 @@
 #ifndef KVILO_UTIL_H
 #define KVILO_UTIL_H
 
-#define VERSION "0.0.1"
-
 unsigned short len(char *string) {
 	unsigned short i = 1;
 	while(string[i++]);
