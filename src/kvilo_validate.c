@@ -2,27 +2,38 @@
 * David Kvilora <datokviloria@gmail.com>
 */
 
+#include <stdio.h>
 #include <string.h>
 
-void kvilo_validate(int argc, char *from_collection, const char *from_cli) {
+#include "kvilo_get_config.h"
+#include "../include/colors.h"
 
-  if (argc <= 2) {
-    create_error(0, "Missing argument: kvilo --validate <key> <value>");
+void kvilo_validate(const char *key, char *config_path, char *config_file, const char *from_cli) {
+
+  char *val = getConfig((char *) key, config_path, config_file);
+
+  if (strcmp(val, "NONE") == 0) {
+    create_error(1, "Variable not found! Type:\tkvilo set <key>=<value>\n");
     return 1;
   }
 
-  if (strcmp(from_collection, "NONE") == 0) {
-    create_error(1, "Error: Variable not found\n");
+  /*
+  * Remove \n from value
+  */
+  rmcfs(val, '\n');
+
+  printf("[!] ENV Variable Validation! Collection: %s[%s]%s\n\n", KVILO_YELLOW, "master", KVILO_RESET);
+
+  if (strcmp(val, from_cli) == 0) {
+    printf("\t[+] status: %sTRUE\n", KVILO_GREEN);
+    printf("%s\t[+] excepted: %s=%s\n", KVILO_RESET, key, from_cli);
+    printf("%s\t[+] actual: %s=%s\n", KVILO_RESET, key, val);
+    printf("\n");
     return 1;
   }
 
-  rmcfs(from_collection, '\n');
-
-  if (strcmp(from_collection, from_cli) == 0 ) {
-    printf("[+] Status: [FOUND]\n");
-  } else {
-    printf("[+] Status: [NOT FOUND]\n");
-    return 1;
-  }
-
+  printf("\t[x] status: %sFALSE\n", KVILO_RED);
+  printf("%s\t[+] excepted: %s=%s\n", KVILO_RESET, key, from_cli);
+  printf("%s\t[+] actual: %s=%s\n", KVILO_RESET, key, val);
+  printf("\n");
 }

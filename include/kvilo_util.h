@@ -1,8 +1,6 @@
 /*
 * David Kviloria <dkviloria@gmail.com>
 */
-#pragma once
-
 #ifndef KVILO_UTIL_H
 #define KVILO_UTIL_H
 
