@@ -64,6 +64,18 @@ int main(int argc, char const *argv[]) {
 		kvilo_validate(argv[2], config_path, config_file, argv[3]);
 	}
 
+	else if (strcmp(argv[1], "export-env") == 0 || strcmp(argv[1], "-e-env") == 0) {
+		kvilo_export_env(config_path, config_file);
+	}
+
+	else if (strcmp(argv[1], "export") == 0 || strcmp(argv[1], "-e") == 0) {
+		system("kvilo export-env > .env");
+	}
+
+	else if (strcmp(argv[1], "export-example") == 0 || strcmp(argv[1], "-ee") == 0) {
+		system("kvilo export-env > .env-example");
+	}
+
 	else if (strcmp(argv[1], "-h") == 0 || strcmp(argv[1], "help") == 0) {
 		kvilo_help();
 	}
