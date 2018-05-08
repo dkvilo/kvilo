@@ -2,7 +2,7 @@
 
     Version: 0.0.1
 
-# Build form source (Linux)
+# Build from source (Linux)
 
 ```
 0) git clone https://github.com/dkvilo/kvilo.git
