@@ -2,14 +2,17 @@
 * David Kvilora <datokviloria@gmail.com>
 */
 void kvilo_help() {
-  printf("\n Usage: kvilo <command> <arg> <flag>\n\n");
-  printf("\tkvilo init\t\t\t\tGenerate [master] collection\n");
-  printf("\tkvilo set key=value\t\t\tStore variable in master collection\n");
-  printf("\tkvilo get key\t\t\t\tGet variable value\n");
-  printf("\tkvilo show\t\t\t\tLoad master collection and print\n");
-  printf("\tkvilo validate key value\t\tValidate variable value\n");
-  printf("\tkvilo export-env > myfile.txt\t\tExport all variable to custom file\n");
-  printf("\tkvilo export\t\t\t\tExport all variable to .env file\n");
-  printf("\tkvilo -ee\t\t\t\tExport all variable to .env-example file\n");
-  printf("\n");
+  printf("\n Usage: kvilo <command> <arg1> <arg2> <flag>\n\n");
+  printf("\tinit        [-i]                  Initial master\n");
+  printf("\tinit        [-i]  [-f]            Force Init\n");
+  printf("\tset         [-s]  <key>=<value>   Store variable\n");
+  printf("\tunset       [-u]  <key>           Remove variable\n");
+  printf("\tget         [-g]  <key>           Get variable\n");
+  printf("\tshow                              See collection\n");
+  printf("\tval         [-v]  <key> <value>   Validate variable\n");
+  printf("\texp-env     [-e-env] > filename   Write collection to file\n");
+  printf("\texp         [-e]                  Export .env file\n");
+  printf("\texp-example [-ee]                 Export .env-example file\n");
+  printf("\thelp        [-h]                  Help message\n");
+  printf("\n\t/usr/bin/kvilo                    David Kviloria <dkvilo>\n\n");
 }
