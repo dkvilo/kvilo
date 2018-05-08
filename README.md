@@ -1,49 +1,40 @@
-# Variable Manager for Unix-Like
-    Author: David Kviloria <datokviloria@gmail.com>
-    Version: 0.1
+# ENV Manager for Project
 
-# Build And Install
+    Version: 0.0.1
+
+# Build form source (Linux)
 
 ```
-1) $ make init
-2) $ make buildx
-3) $ make install
-4) $ make reset_build
+0) git clone https://github.com/dkvilo/kvilo.git
+1) cd kvilo
+2) make init
+3) make buildx
+4) make install
 ```
 
-# Usage for 1.0
+# Usage
+	Usage: kvilo <command> <arg1> <arg2> <flag>
 
-    # Init Config for
-    $ kvilo init
+		init        [-i]                  Initial master
+		init        [-i]  [-f]            Force Init   
+		set         [-s]  <key>=<value>   Store variable
+		unset       [-u]  <key>           Remove variable
+		get         [-g]  <key>           Get variable
+		show                              See collection
+		val         [-v]  <key> <value>   Validate variable
+		exp-env     [-e-env] > filename   Write collection to file
+		exp         [-e]                  Export .env file
+		exp-example [-ee]                 Export .env-example file
+		help        [-h]                  Help message
 
-    # Set Variable
-    $ kvilo set foo=bar
+	./usr/bin/kvilo                     David Kviloria <dkvilo>
 
-    # Get Variable and print value
-    $ kvilo get foo | xargs echo
-
-    # validate variable: Command --validate <key> <value>
-    $ kvilo validate foo bar
-
-    # Print available variables
-    $ kvilo list
-
-    # To reset existing config type init command again
-    $ kvilo init
 
 
 # Todo
-- add ``unset`` command
-- add ``-h`` flag and help menu
-- add multiple config support
+- Multiple Collection Support [1.0]
 
-# Screenshots
-![Init Command](https://raw.githubusercontent.com/dkvilo/kvilo/master/Screenshot/init.png)
+# Meta
 
-![Set Variable](https://raw.githubusercontent.com/dkvilo/kvilo/master/Screenshot/set.png)
-
-![Get Value](https://raw.githubusercontent.com/dkvilo/kvilo/master/Screenshot/get.png)
-
-![Valdiate Variable Value](https://raw.githubusercontent.com/dkvilo/kvilo/master/Screenshot/validate.png)
-
-![List Variables](https://raw.githubusercontent.com/dkvilo/kvilo/master/Screenshot/list.png)
+    Author: David Kviloria <datokviloria@gmail.com>
+    License: MIT
