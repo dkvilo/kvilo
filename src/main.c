@@ -41,7 +41,7 @@ int main(int argc, char const *argv[]) {
  	 }
   }
 
-	else if (strcmp(argv[1], "get") == 0) {
+	else if (strcmp(argv[1], "get") == 0 || strcmp(argv[1], "-g") == 0) {
 		if (argc <= 2) {
 			create_error(1, "Error: Missing argument for get! Type:\t kvilo get <key>\n");
 			return 1;
@@ -49,7 +49,7 @@ int main(int argc, char const *argv[]) {
 		kvilo_get(argv[2], config_path, config_file);
 	}
 
-	else if (strcmp(argv[1], "set") == 0) {
+	else if (strcmp(argv[1], "set") == 0 || strcmp(argv[1], "-s") == 0) {
 		kvilo_set(config_path, config_file, argv[2]);
 	}
 
@@ -57,24 +57,24 @@ int main(int argc, char const *argv[]) {
 		kvilo_read_config(config_path, config_file);
 	}
 
-	else if ( strcmp(argv[1], "-v") == 0 || strcmp(argv[1], "validate") == 0) {
+	else if ( strcmp(argv[1], "-v") == 0 || strcmp(argv[1], "val") == 0) {
 		if (argc <= 3) {
-			create_error(1, "Error: Missing argument for get! Type:\t kvilo validate <key> <value>\n");
+			create_error(1, "Error: Missing argument for get! Type:\t kvilo val <key> <value>\n");
 			return 1;
 		}
 		kvilo_validate(argv[2], config_path, config_file, argv[3]);
 	}
 
-	else if (strcmp(argv[1], "export-env") == 0 || strcmp(argv[1], "-e-env") == 0) {
+	else if (strcmp(argv[1], "exp-env") == 0 || strcmp(argv[1], "-e-env") == 0) {
 		kvilo_export_env(config_path, config_file);
 	}
 
-	else if (strcmp(argv[1], "export") == 0 || strcmp(argv[1], "-e") == 0) {
-		system("kvilo export-env > .env");
+	else if (strcmp(argv[1], "exp") == 0 || strcmp(argv[1], "-e") == 0) {
+		system("kvilo exp-env > .env");
 	}
 
-	else if (strcmp(argv[1], "export-example") == 0 || strcmp(argv[1], "-ee") == 0) {
-		system("kvilo export-env > .env-example");
+	else if (strcmp(argv[1], "exp-example") == 0 || strcmp(argv[1], "-ee") == 0) {
+		system("kvilo exp-env > .env-example");
 	}
 
 	else if (strcmp(argv[1], "-u") == 0 || strcmp(argv[1], "unset") == 0) {
@@ -89,7 +89,7 @@ int main(int argc, char const *argv[]) {
 		kvilo_help();
 	}
 
-	 else {
+	else {
 		create_error(1, "Unknown args Type: kvilo -h\n");
 	}
 
