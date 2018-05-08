@@ -9,6 +9,7 @@
 #include "../include/kvilo.h"
 
 #include "kvilo_set.h"
+#include "kvilo_unset.h"
 #include "kvilo_init.h"
 #include "kvilo_read_config.h"
 #include "kvilo_get_config.h"
@@ -74,6 +75,14 @@ int main(int argc, char const *argv[]) {
 
 	else if (strcmp(argv[1], "export-example") == 0 || strcmp(argv[1], "-ee") == 0) {
 		system("kvilo export-env > .env-example");
+	}
+
+	else if (strcmp(argv[1], "-u") == 0 || strcmp(argv[1], "unset") == 0) {
+		if (argc <= 2) {
+			create_error(1, "Error: Missing argument for unset! Type:\t kvilo unset <key>\n");
+			return 1;
+		}
+		kvilo_unset(argv[2], config_path, config_file);
 	}
 
 	else if (strcmp(argv[1], "-h") == 0 || strcmp(argv[1], "help") == 0) {
