@@ -25,7 +25,7 @@ void kvilo_read_config(char *config_path, char *config_file) {
     return 1;
   }
 
-  char line[128];
+  char line[1024];
   char *collName = substr(config_file, 8);
   unsigned short count_line = 0;
 
