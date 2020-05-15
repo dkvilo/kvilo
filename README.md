@@ -2,11 +2,16 @@
 
     Version: 0.0.1
 
-# Building (Linux and Mac)
+# Building locally (Linux and Mac)
 
+```bash
+  make build
+  make install_mac or install_linux 
 ```
-1) make build
-2) make install_mac or install_linux 
+
+# Building with Docker
+```
+  docker build . -t kvilo-1.0.0:beta
 ```
 
 # Usage
