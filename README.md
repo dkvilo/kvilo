@@ -1,15 +1,17 @@
-# ENV Manager for Project
+# ENV Manager
 
     Version: 0.0.1
 
-# Build from source (Linux)
+# Building locally (Linux and Mac)
 
+```bash
+  make build
+  make install_mac or install_linux 
 ```
-0) git clone https://github.com/dkvilo/kvilo.git
-1) cd kvilo
-2) make init
-3) make buildx
-4) make install
+
+# Building with Docker
+```
+  docker build . -t kvilo-1.0.0:beta
 ```
 
 # Usage
@@ -32,9 +34,9 @@
 
 
 # Todo
-- Multiple Collection Support [1.0]
+[ ] Multiple Collection Support [1.0]
 
 # Meta
-
-    Author: David Kviloria <datokviloria@gmail.com>
-    License: MIT
+  **Author**: David Kviloria
+  
+  **License**: MIT
