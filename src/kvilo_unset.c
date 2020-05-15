@@ -11,7 +11,7 @@ void kvilo_unset(const char *cli_key, char *config_path, char *config_file) {
 
   if (strcmp(val, "NONE") == 0) {
     create_error(1, "Variable not found! Type:\tkvilo set <key>=<value>\n");
-    return 1;
+    exit(-1);
   }
 
   char path[128];
@@ -29,7 +29,7 @@ void kvilo_unset(const char *cli_key, char *config_path, char *config_file) {
 
   if( inFile == NULL ) {
     printf("Open Error");
-    return 1;
+    exit(-1);
   }
 
   while( fgets(line, sizeof(line), inFile) != NULL ) {
