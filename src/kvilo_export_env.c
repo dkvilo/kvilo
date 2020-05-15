@@ -27,7 +27,7 @@ void kvilo_export_env(char *config_path, char *config_file) {
 
   if (fp == NULL) {
     printf(fp, "# KVILO ENV Manager %s\n# Collection: `%s`\n# Time: %s\n", VERSION, "master", asctime(timeinfo));
-    exit(-1);
+    exit(0);
   }
 
   char line[128];

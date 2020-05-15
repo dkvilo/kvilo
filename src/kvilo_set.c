@@ -28,7 +28,7 @@ void kvilo_set(char *config_path, char *config_file, const char *var) {
 
     if (fp == NULL) {
       create_error(1, "Error While Update Collection\n");
-      exit(-1);
+      exit(0);
     }
 
     /*
