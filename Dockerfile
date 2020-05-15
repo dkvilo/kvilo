@@ -22,6 +22,8 @@ RUN kvilo init
 RUN kvilo set foo=bar
 RUN kvilo get foo
 
+RUN kvilo val foo bar
+
 RUN kvilo show
 RUN kvilo exp env > .env
 
