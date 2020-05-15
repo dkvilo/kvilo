@@ -14,7 +14,7 @@ void kvilo_validate(const char *key, char *config_path, char *config_file, const
 
   if (strcmp(val, "NONE") == 0) {
     create_error(1, "Variable not found! Type:\tkvilo set <key>=<value>\n");
-    exit(-1);
+    exit(0);
   }
 
   /*
@@ -29,7 +29,7 @@ void kvilo_validate(const char *key, char *config_path, char *config_file, const
     printf("%s\t[+] excepted: %s=%s\n", KVILO_RESET, key, from_cli);
     printf("%s\t[+] actual: %s=%s\n", KVILO_RESET, key, val);
     printf("\n");
-    exit(-1);
+    exit(0);
   }
 
   printf("\t[x] status: %sFALSE\n", KVILO_RED);

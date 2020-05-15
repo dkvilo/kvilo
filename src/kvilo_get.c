@@ -11,7 +11,7 @@ void kvilo_get(const char *key, char *config_path, char *config_file){
 
   if (strcmp(val, "NONE") == 0) {
     create_error(1, "Variable not found! Type:\tkvilo set <key>=<value>\n");
-    exit(-1);
+    exit(0);
   }
   
   printf("%s", val);

@@ -22,7 +22,7 @@ void kvilo_read_config(char *config_path, char *config_file) {
   if (fp == NULL) {
     create_error(0, "Collection not found! Type:\n\n\t[+] kvilo init \n\t[+] kvilo -i\n");
     create_error(0, "Help: kvilo -h");
-    exit(-1);
+    exit(0);
   }
 
   char line[1024];
