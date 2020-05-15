@@ -1,14 +1,25 @@
-init:
+CC := gcc
+SOURCE := src
+BUILD_DIR := build
+BIN := kvilo
+
+prepare:
 	mkdir build
 
-buildx:
-	gcc -w src/*.c -o build/kvilo
+install_linux:
+	chmod 711 $(BUILD_DIR)/$(BIN) && cp $(BUILD_DIR)/$(BIN) /usr/bin/
 
-install:
-	chmod 711 build/kvilo && sudo cp build/kvilo /usr/bin
+install_mac:
+	cp $(BUILD_DIR)/$(BIN) /usr/local/bin/
 
 clean_bin:
-	rm build/kvilo
+	rm $(BUILD_DIR)/$(BIN)
 
-reset_build:
-	rm -rf build
+clean:
+	rm -rf $(BUILD_DIR)
+
+build:
+	make prepare && $(CC) -w $(SOURCE)/*.c -o $(BUILD_DIR)/$(BIN)
+
+.PHONY:
+	build clean install_mac install_linux
