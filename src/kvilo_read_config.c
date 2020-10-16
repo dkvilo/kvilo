@@ -26,10 +26,9 @@ void kvilo_read_config(char *config_path, char *config_file) {
   }
 
   char line[1024];
-  char *collName = substr(config_file, 8);
   unsigned short count_line = 0;
 
-  printf("Collection: %s[%s]%s\n\n", KVILO_YELLOW, collName, KVILO_RESET );
+  printf("Collection: %s[%s]%s\n\n", KVILO_YELLOW, config_file, KVILO_RESET );
   while (fgets(line, sizeof line, fp) != NULL) {
     count_line++;
     key = strtok(line, search);

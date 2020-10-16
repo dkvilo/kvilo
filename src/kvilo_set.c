@@ -11,7 +11,7 @@ void kvilo_set(char *config_path, char *config_file, const char *var) {
 
   if (var != NULL) {
 
-    char *line[128];
+    char *line[1024];
     char *token;
     char *value;
     char *search = "=";

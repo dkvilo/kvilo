@@ -9,7 +9,7 @@
 
 char *getConfig(char *target_key, char *config_path, char *config_file) {
 
-	char *line[128];
+	char *line[1024];
 	char *search = "=";
 	char *token;
 	char *value;
