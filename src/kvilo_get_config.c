@@ -40,7 +40,7 @@ char *getConfig(char *target_key, char *config_path, char *config_file) {
 		fseek (fp, 0, SEEK_END);
 		size = ftell(fp);
 		if (0 == size) {
-				printf("\n [!] Collection %s[%s]%s is empty!\n", KVILO_YELLOW, "master", KVILO_RESET);
+				printf("\n [!] Collection %s[%s]%s is empty!\n", KVILO_YELLOW, config_file, KVILO_RESET);
 				value = "NONE";
 				return value;
 		}

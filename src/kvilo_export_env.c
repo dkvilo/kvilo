@@ -8,10 +8,7 @@
 #include "../include/colors.h"
 #include "../include/version.h"
 
-/*
-* TODO: need to support to export diff collection as env file
-*/
-void kvilo_export_env(char *config_path, char *config_file) {
+void kvilo_export_env(char *config_path, char *config_file, short example) {
 
   char *key;
   char *value;
@@ -26,19 +23,23 @@ void kvilo_export_env(char *config_path, char *config_file) {
   FILE *fp = fopen(strcat(config_path, config_file), "r");
 
   if (fp == NULL) {
-    printf(fp, "# KVILO ENV Manager %s\n# Collection: `%s`\n# Time: %s\n", VERSION, "master", asctime(timeinfo));
+    printf(fp, "# KVILO ENV Manager %s\n# Collection: `%s`\n# Time: %s\n", VERSION, config_file, asctime(timeinfo));
     exit(0);
   }
 
   char line[128];
   unsigned short count_line = 0;
 
-  printf("# KVILO ENV Manager %s\n# Collection: `%s`\n# Time: %s\n", VERSION, "master", asctime(timeinfo));
+  printf("# KVILO ENV Manager %s\n# Collection: `%s`\n# Time: %s\n", VERSION, config_file, asctime(timeinfo));
   while (fgets(line, sizeof line, fp) != NULL) {
     count_line++;
     key = strtok(line, search);
-    value = strtok(NULL, search);
-    printf("%s=%s", key, value);
+    if (!example) {
+      value = strtok(NULL, search);
+      printf("%s=%s", key, value);
+    } else {
+      printf("%s=\n", key);
+    }
   }
 
   fclose(fp);

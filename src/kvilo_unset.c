@@ -52,7 +52,7 @@ void kvilo_unset(const char *cli_key, char *config_path, char *config_file) {
 
   if( !rename(outFileName, inFileName) ) {
     if ( rename(outFileName, inFileName) ) {
-      printf("\n [+] Variable (%s%s%s) has been removed from (%s%s%s) collection\n\n", KVILO_RED, cli_key, KVILO_RESET, KVILO_YELLOW, "master", KVILO_RESET);
+      printf("\n [+] Variable (%s%s%s) has been removed from (%s%s%s) collection\n\n", KVILO_RED, cli_key, KVILO_RESET, KVILO_YELLOW, config_file, KVILO_RESET);
     }
   }
 

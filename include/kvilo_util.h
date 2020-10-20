@@ -4,12 +4,20 @@
 #ifndef KVILO_UTIL_H
 #define KVILO_UTIL_H
 
+#ifdef DEFINE_KVILO_UTIL_NO_STATIC
+#define KVILO_UTIL_FUNC_TYPE extern inline
+#else
+#define KVILO_UTIL_FUNC_TYPE static inline
+#endif
+
+KVILO_UTIL_FUNC_TYPE
 unsigned short len(char *string) {
 	unsigned short i = 1;
 	while(string[i++]);
 	return i--;
 }
 
+KVILO_UTIL_FUNC_TYPE
 char *substr(char *string, unsigned short from) {
   char newStr[150];
   for(unsigned short i; i < len(string) - from; i++)
@@ -18,6 +26,7 @@ char *substr(char *string, unsigned short from) {
   return ret;
 }
 
+KVILO_UTIL_FUNC_TYPE
 void rmcfs(char* source, char target) {
   char *i = source;
   char *j = source;

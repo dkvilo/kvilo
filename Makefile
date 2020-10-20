@@ -1,4 +1,4 @@
-CC := gcc
+CC := gcc -std=c99
 SOURCE := src
 BUILD_DIR := build
 BIN := kvilo
@@ -19,7 +19,7 @@ clean:
 	rm -rf $(BUILD_DIR)
 
 build:
-	make prepare && $(CC) -w $(SOURCE)/*.c -o $(BUILD_DIR)/$(BIN)
+	make prepare && $(CC) -w $(SOURCE)/*.c -llua -o $(BUILD_DIR)/$(BIN)
 
 .PHONY:
 	build clean install_mac install_linux

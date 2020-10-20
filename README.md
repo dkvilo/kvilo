@@ -1,6 +1,7 @@
 # ENV Manager
 
-    Version: 0.0.1
+  Version: 1.0.0
+
 
 # Building locally (Linux and Mac)
 
@@ -12,6 +13,15 @@
 # Building with Docker
 ```
   docker build . -t kvilo-1.0.0:beta
+```
+
+# Using Macros
+
+```
+$ kvilo init
+$ cp conf.lua ~/.kvilo/
+
+$ kvilo my awesome macro
 ```
 
 # Usage
@@ -31,10 +41,10 @@
 
 	./usr/bin/kvilo                     David Kviloria <dkvilo>
 
-
-
 # Todo
-[ ] Multiple Collection Support [1.0]
+ - [x] Multiple Collection Support [1.0]
+ - [x] Programmable macros (Janet or Lua)
+ - [ ] Write Docs and update Changelog
 
 # Meta
   **Author**: David Kviloria

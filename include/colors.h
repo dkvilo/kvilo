@@ -1,3 +1,6 @@
+/*
+* David Kvilora <datokviloria@gmail.com>
+*/
 #ifndef COLORS_H
 #define COLORS_H
 
