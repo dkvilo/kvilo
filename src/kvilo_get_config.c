@@ -5,7 +5,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "../include/colors.h"
+#include "colors.h"
 
 char *getConfig(char *target_key, char *config_path, char *config_file) {
 

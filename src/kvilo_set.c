@@ -5,7 +5,7 @@
 #include <string.h>
 #include <stdlib.h>
 
-#include "../include/colors.h"
+#include "colors.h"
 
 void kvilo_set(char *config_path, char *config_file, const char *var) {
 

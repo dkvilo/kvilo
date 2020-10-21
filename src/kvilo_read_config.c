@@ -4,9 +4,9 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "../include/colors.h"
+#include "colors.h"
 #define DEFINE_KVILO_UTIL_NO_STATIC
-#include "../include/kvilo_util.h"
+#include "kvilo_util.h"
 
 void kvilo_read_config(char *config_path, char *config_file) {
 

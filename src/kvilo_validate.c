@@ -6,7 +6,7 @@
 #include <string.h>
 
 #include "kvilo_get_config.h"
-#include "../include/colors.h"
+#include "colors.h"
 
 void kvilo_validate(const char *key, char *config_path, char *config_file, const char *from_cli) {
 

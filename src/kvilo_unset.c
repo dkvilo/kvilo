@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "../include/colors.h"
+#include "colors.h"
 
 #include "kvilo_get_config.h"
 

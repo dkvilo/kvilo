@@ -6,11 +6,13 @@ SOURCE := src
 BUILD_DIR := build
 BIN := kvilo
 
+KVILO_INCS := include
 DEPS_DIR := deps
+
 LUA_DIR := $(DEPS_DIR)/lua-5.2.0
 LUA_LIB := $(LUA_DIR)/install/lib/liblua.a
 
-FINAL_CFLAGS := -I.$(LUA_DIR)/src ./$(LUA_LIB)
+FINAL_CFLAGS := -I./$(KVILO_INCS) -I./$(LUA_DIR)/src ./$(LUA_LIB)
 
 lua:
 	cd $(LUA_DIR) && make local

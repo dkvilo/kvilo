@@ -5,8 +5,8 @@
 #include <string.h>
 #include <time.h>
 
-#include "../include/colors.h"
-#include "../include/version.h"
+#include "colors.h"
+#include "version.h"
 
 void kvilo_export_env(char *config_path, char *config_file, short example) {
 

@@ -8,7 +8,7 @@
 #include <unistd.h>
 
 #define DEFINE_NO_INLINE
-#include "../include/kvilo.h"
+#include "kvilo.h"
 
 #include "kvilo_set.h"
 #include "kvilo_unset.h"

@@ -2,7 +2,7 @@
 * David Kvilora <datokviloria@gmail.com>
 */
 #include <stdio.h>
-#include "../include/colors.h"
+#include "colors.h"
 
 void kvilo_create_col(char *config_path, char *config_file) {
 

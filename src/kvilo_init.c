@@ -6,7 +6,7 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 
-#include "../include/colors.h"
+#include "colors.h"
 
 void kvilo_init(const char *flag, char *config_path, char *config_file) {
   
