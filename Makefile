@@ -37,7 +37,10 @@ clean:
 	rm -rf $(BUILD_DIR)
 
 build:
-	make prepare && $(CC) -w $(SOURCE)/*.c $(FINAL_CFLAGS) -o $(BUILD_DIR)/$(BIN)
+	make prepare && make lua && $(CC) -w $(SOURCE)/*.c $(FINAL_CFLAGS) -o $(BUILD_DIR)/$(BIN)
 
 .PHONY:
-	build clean install_mac install_linux lua
+	build clean install_mac install_linux lua prepare
+
+.DEFAULT:
+	build
