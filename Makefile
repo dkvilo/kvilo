@@ -1,7 +1,19 @@
+# David Kviloria 2016 - 2020
+# datokviloria@gmail.com
+
 CC := gcc -std=c99
 SOURCE := src
 BUILD_DIR := build
 BIN := kvilo
+
+DEPS_DIR := deps
+LUA_DIR := $(DEPS_DIR)/lua-5.2.0
+LUA_LIB := $(LUA_DIR)/install/lib/liblua.a
+
+FINAL_CFLAGS := -I.$(LUA_DIR)/src ./$(LUA_LIB)
+
+lua:
+	cd $(LUA_DIR) && make local
 
 prepare:
 	mkdir build
@@ -19,7 +31,7 @@ clean:
 	rm -rf $(BUILD_DIR)
 
 build:
-	make prepare && $(CC) -w $(SOURCE)/*.c -llua -o $(BUILD_DIR)/$(BIN)
+	make prepare && $(CC) -w $(SOURCE)/*.c $(FINAL_CFLAGS) -o $(BUILD_DIR)/$(BIN)
 
 .PHONY:
-	build clean install_mac install_linux
+	build clean install_mac install_linux lua
