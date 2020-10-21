@@ -11,8 +11,8 @@
 
 #include "version.h"
 
-#include "../deps/lua-5.2.0/install/include/lua.h"
-#include "../deps/lua-5.2.0/install/include/lauxlib.h"
+#include "../deps/lua-5.2.0/src/lua.h"
+#include "../deps/lua-5.2.0/src/lauxlib.h"
 
 typedef struct {
   char m_path[180];
