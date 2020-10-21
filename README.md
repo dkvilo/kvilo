@@ -1,18 +1,14 @@
 # ENV Manager
+Version: 1.0.0
 
-  Version: 1.0.0
 
+[Documentation and Changelog](https://github.com/dkvilo/kvilo/blob/master/changelog.md)
 
 # Building locally (Linux and Mac)
 
 ```bash
-  make build
+  make or make build
   make install_mac or install_linux 
-```
-
-# Building with Docker
-```
-  docker build . -t kvilo-1.0.0:beta
 ```
 
 # Using Macros
@@ -24,27 +20,13 @@ $ cp conf.lua ~/.kvilo/
 $ kvilo my awesome macro
 ```
 
-# Usage
+# Basic Usage
 	Usage: kvilo <command> <arg1> <arg2> <flag>
-
-		init        [-i]                  Initial master
-		init        [-i]  [-f]            Force Init   
-		set         [-s]  <key>=<value>   Store variable
-		unset       [-u]  <key>           Remove variable
-		get         [-g]  <key>           Get variable
-		show                              See collection
-		val         [-v]  <key> <value>   Validate variable
-		exp-env     [-e-env] > filename   Write collection to file
-		exp         [-e]                  Export .env file
-		exp-example [-ee]                 Export .env-example file
-		help        [-h]                  Help message
-
-	./usr/bin/kvilo                     David Kviloria <dkvilo>
 
 # Todo
  - [x] Multiple Collection Support [1.0]
- - [x] Programmable macros (Janet or Lua)
- - [ ] Write Docs and update Changelog
+ - [x] Programmable macros (Lua)
+ - [x] Write Docs and update Changelog
 
 # Meta
   **Author**: David Kviloria
