@@ -1,6 +1,6 @@
 local macro = {}
 
--- This macro reads ssh key value from collection tinyhoods.net and passes to ssh command
+-- This macro reads ssh key value from collection mycollection and passes to ssh command
 -- macro.ssh = "ssh `kvilo get mycollection myserver_auth_info`"
 
 -- Custom Message
