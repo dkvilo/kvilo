@@ -5,6 +5,7 @@ CC := gcc -std=c99
 SOURCE := src
 BUILD_DIR := build
 BIN := kvilo
+KVILO_HOME := ~/.kvilo
 
 KVILO_INCS := include
 DEPS_DIR := deps
@@ -19,6 +20,9 @@ lua:
 
 prepare:
 	mkdir build
+
+copy_config:
+	cp ./conf.lua $(KVILO_HOME)
 
 install_linux:
 	chmod 711 $(BUILD_DIR)/$(BIN) && cp $(BUILD_DIR)/$(BIN) /usr/bin/
