@@ -20,7 +20,6 @@
 #include "kvilo_help.h"
 #include "kvilo_create_col.h"
 
-
 int main(int argc, char const *argv[]) {
 
   char *config_path[256];
