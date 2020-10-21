@@ -4,13 +4,10 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "../include/colors.h"
-#include "../include/kvilo_util.h"
+#include "colors.h"
+#define DEFINE_KVILO_UTIL_NO_STATIC
+#include "kvilo_util.h"
 
-/*
-* on this version, kvilo_read_config reads global config
-* TODO: need to support to read diff collection
-*/
 void kvilo_read_config(char *config_path, char *config_file) {
 
   char *key;

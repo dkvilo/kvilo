@@ -1,12 +1,14 @@
 /*
 * David Kvilora <datokviloria@gmail.com>
+* 
 */
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
 
-#include "../include/kvilo.h"
+#define DEFINE_NO_INLINE
+#include "kvilo.h"
 
 #include "kvilo_set.h"
 #include "kvilo_unset.h"
@@ -16,91 +18,158 @@
 #include "kvilo_validate.h"
 #include "kvilo_get.h"
 #include "kvilo_help.h"
-
-char config_path[80];
-char *config_file =  "/.kvilo_master";
+#include "kvilo_create_col.h"
 
 int main(int argc, char const *argv[]) {
 
-	snprintf(config_path, sizeof config_path, getenv("HOME"));
+  char *config_path[256];
+	snprintf(config_path, sizeof(config_path), getenv("HOME"));
+
+  config_t cfg;
+  new_config(&cfg);
+  absolute_path(&cfg, config_path);
+  config_load_defaults(&cfg);
+
+  bind_lua(&cfg, argv);
 
 	if ( argc <= 1 ) {
 		kvilo_help();
-		return 1;
+		return 0;
 	}
 
-	if (strcmp(argv[1], "init") == 0 || strcmp(argv[1], "-i") == 0) {
- 	 if (argc == 3) {
- 		 if (strcmp(argv[2], "-f") == 0) {
- 			 kvilo_init(argv[2], config_path, config_file);
- 		 } else {
- 			 create_error(1, "Error: Unknown Flag for init: Did you mean -f ?\n");
- 		 }
- 	 } else {
- 		 kvilo_init(NULL, config_path, config_file);
- 	 }
+  if (strcmp(argv[1], "init") == 0 || strcmp(argv[1], "-i") == 0) {
+    if (argc == 3) strcpy(cfg.m_default_collection, argv[2]);
+    kvilo_init((argv[3]), cfg.m_path, cfg.m_default_collection);
   }
 
-	else if (strcmp(argv[1], "get") == 0 || strcmp(argv[1], "-g") == 0) {
-		if (argc <= 2) {
-			create_error(1, "Error: Missing argument for get! Type:\t kvilo get <key>\n");
+	if (strcmp(argv[1], "get") == 0 || strcmp(argv[1], "-g") == 0) {
+
+    if (argc == 3) {
+      kvilo_get(argv[2], cfg.m_path, cfg.m_default_collection);
+      return 0;
+    }
+
+    else if (argc == 4) {
+      strcpy(cfg.m_default_collection, argv[2]);
+		  kvilo_get(argv[3], cfg.m_path, cfg.m_default_collection);
+      return 0;
+    }
+
+    else {
+      create_error(1, "Error: Wrong usage of [GET]");
+      create_message("Usage: kvilo get <collection> (optional) <key> (required)");
 			return 1;
-		}
-		kvilo_get(argv[2], config_path, config_file);
+    }
+
 	}
 
-	else if (strcmp(argv[1], "set") == 0 || strcmp(argv[1], "-s") == 0) {
-		kvilo_set(config_path, config_file, argv[2]);
-	}
+	if (strcmp(argv[1], "set") == 0 || strcmp(argv[1], "-s") == 0) {
+    
+    if (argc == 3) {
+      kvilo_set(cfg.m_path, cfg.m_default_collection, argv[2]);
+      return 0;
+    }
+    
+    else if (argc == 4) {
+      strcpy(cfg.m_default_collection, argv[2]);
+	  	kvilo_set(cfg.m_path, cfg.m_default_collection, argv[3]);
+      return 0;
+    }
 
-	else if (strcmp(argv[1], "show") == 0) {
-		kvilo_read_config(config_path, config_file);
-	}
-
-	else if ( strcmp(argv[1], "-v") == 0 || strcmp(argv[1], "val") == 0) {
-		if (argc <= 3) {
-			create_error(1, "Error: Missing argument for get! Type:\t kvilo val <key> <value>\n");
+    else {
+      create_error(1, "Error: Wrong usage of [SET]");
+      create_message("Usage: kvilo set <collection> (optional) <key=<value> (required)");
 			return 1;
+    }
+
+	}
+
+  if (strcmp(argv[1], "-u") == 0 || strcmp(argv[1], "unset") == 0) {
+    
+    if (argc == 3) {
+      kvilo_unset(argv[2], cfg.m_path, cfg.m_default_collection);
+			return 0;
 		}
-		kvilo_validate(argv[2], config_path, config_file, argv[3]);
+
+    else if (argc == 4) {
+      strcpy(cfg.m_default_collection, argv[2]);
+      kvilo_unset(argv[3], cfg.m_path, cfg.m_default_collection);
+      return 0;
+    }
+
+    else {
+			create_error(1, "Error: Wrong usage of [UNSET]");
+      create_message("Usage: kvilo unset <collection> (optional) <key> (required)");
+    }
 	}
 
-	else if (strcmp(argv[1], "exp-env") == 0 || strcmp(argv[1], "-e-env") == 0) {
-		kvilo_export_env(config_path, config_file);
+	if (strcmp(argv[1], "show") == 0 || strcmp(argv[1], "ls") == 0) {
+    if (argc == 3) strcpy(cfg.m_default_collection, argv[2]);
+		kvilo_read_config(cfg.m_path, cfg.m_default_collection);
 	}
 
-	else if (strcmp(argv[1], "exp") == 0 || strcmp(argv[1], "-e") == 0) {
-		system("kvilo exp-env > .env");
-	}
+	if (strcmp(argv[1], "-v") == 0 || strcmp(argv[1], "val") == 0) {
 
-	else if (strcmp(argv[1], "exp-example") == 0 || strcmp(argv[1], "-ee") == 0) {
-		system("kvilo exp-env > .env-example");
-	}
-
-	else if (strcmp(argv[1], "-u") == 0 || strcmp(argv[1], "unset") == 0) {
-		if (argc <= 2) {
-			create_error(1, "Error: Missing argument for unset! Type:\t kvilo unset <key>\n");
-			return 1;
+    if (argc == 4) {
+      kvilo_validate(argv[2], cfg.m_path, cfg.m_default_collection, argv[3]);
+			return 0;
 		}
-		kvilo_unset(argv[2], config_path, config_file);
+
+    else if (argc == 5) {
+      strcpy(cfg.m_default_collection, argv[2]);
+      kvilo_validate(argv[3], cfg.m_path, cfg.m_default_collection, argv[4]);
+      return 0;
+    }
+
+    else {
+			create_error(1, "Error: Wrong usage of [VAL]");
+      create_message("Usage: kvilo val <collection> (optional) <key> (required) <value> (required)");
+      return 1;
+    }
 	}
 
-	else if (strcmp(argv[1], "-h") == 0 || strcmp(argv[1], "help") == 0) {
+	if (strcmp(argv[1], "exp") == 0 || strcmp(argv[1], "-e") == 0) {
+		
+    if (argc == 2) {
+      kvilo_export_env(cfg.m_path, cfg.m_default_collection, 0);
+			return 0;
+		}
+
+    else if (argc == 3) {
+      strcpy(cfg.m_default_collection, argv[2]);
+      kvilo_export_env(cfg.m_path, cfg.m_default_collection, 0);
+      return 0;
+    }
+
+    else {
+			create_error(1, "Error: Wrong usage of [EXP]");
+      create_message("Usage: kvilo exp <collection> (optional)");
+    }
+
+	}
+
+	if (strcmp(argv[1], "exp-example") == 0 || strcmp(argv[1], "-ee") == 0) {
+    if (argc == 2) {
+      kvilo_export_env(cfg.m_path, cfg.m_default_collection, 1);
+			return 0;
+		}
+
+    else if (argc == 3) {
+      strcpy(cfg.m_default_collection, argv[2]);
+      kvilo_export_env(cfg.m_path, cfg.m_default_collection, 1);
+      return 0;
+    }
+
+    else {
+			create_error(1, "Error: Wrong usage of [SYS-EXP-ENV]");
+      create_message("Usage: kvilo exp-example <collection> (optional)");
+    }
+	}
+
+	if (strcmp(argv[1], "-h") == 0 || strcmp(argv[1], "help") == 0) {
 		kvilo_help();
-	}
-
-	else {
-		create_error(1, "Unknown args Type: kvilo -h\n");
 	}
 
 	return 0;
 }
 
-void create_message(const char *message) {
-	printf("[+] %s", message);
-}
-
-void create_error(unsigned short type, const char *message) {
-	if (type) printf(KVILO_RED"\n [x]%s %s\n", KVILO_RESET, message);
-	else printf(KVILO_RED" [x]%s %s\n", KVILO_RESET, message);
-}

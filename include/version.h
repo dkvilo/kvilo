@@ -1,9 +1,9 @@
 /*
-* David Kviloria <datokviloria@gmail.com>
+* David Kvilora <datokviloria@gmail.com>
 */
-#ifndef KVILO_H
-#define KVILO_H
+#ifndef KVILO_VERSION_H
+#define KVILO_VERSION_H
 
-#define VERSION "0.0.1"
+#define VERSION "1.0.0"
 
 #endif

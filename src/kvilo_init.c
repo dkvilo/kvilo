@@ -3,35 +3,30 @@
 */
 #include <stdio.h>
 #include <unistd.h>
+#include <sys/types.h>
+#include <sys/stat.h>
 
-#include "../include/colors.h"
-
-void create_coll(char *config_path, char *config_file);
+#include "colors.h"
 
 void kvilo_init(const char *flag, char *config_path, char *config_file) {
+  
+  char *temp_path[sizeof(char*) * 2];
+  snprintf(temp_path, sizeof(temp_path), "%s%s", config_path, config_file);
 
-  if (access(strcat(config_path, config_file), F_OK) != -1) {
-    if (flag != NULL) {
-      if (strcmp(flag, "-f") == 0) {
-        create_coll(config_path, config_file);
-      }
-    } else {
-      create_error(1, "Note: Collection [master] is initialized!\n\n\tType: [kvilo init -f] to recreate");
-      create_error(1, "Warning: This action will remove all data from clollection\n");
-    }
+  struct stat st = {0};
+  if (stat(config_path, &st) == -1) {
+    mkdir(config_path, 0700);
+  }
+
+  int exists = access(temp_path, F_OK) != -1;
+  if (exists && flag == NULL) {
+    create_error(1, "Note: Collection is already initialized!\n\n\tType: [kvilo init <collection> -f] to recreate");
+    create_error(1, "Warning: This action will remove all data from collection\n");
+  } else if (exists && strcmp(flag, "-f") == 0) {
+    kvilo_create_col(config_path, config_file);
   } else {
-    create_coll(config_path, config_file);
+    kvilo_create_col(config_path, config_file);
   }
+
 }
 
-void create_coll(char *config_path, char *config_file) {
-
-  FILE *fp = fopen(config_path, "w");
-  if (fp == NULL) {
-    create_error(1, "SYSError: While Createing Config ...\n");
-    exit(0);
-  }
-  printf("\n [+] Collection %s[master]%s generated successfully\n\n", KVILO_YELLOW, KVILO_RESET);
-  fclose(fp);
-
-}
