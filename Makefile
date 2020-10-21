@@ -41,6 +41,3 @@ build:
 
 .PHONY:
 	build clean install_mac install_linux lua prepare
-
-.DEFAULT:
-	build

@@ -7,7 +7,7 @@ Version: 1.0.0
 # Building locally (Linux and Mac)
 
 ```bash
-  make or make build
+  make build
   make install_mac or install_linux 
 ```
 
