@@ -1,2 +1,5 @@
 /build/
+/deps/lua-5.2.0/install
+/deps/.DS_Store
+/deps/lua-5.2.0/.DS_Store
 .DS_Store
