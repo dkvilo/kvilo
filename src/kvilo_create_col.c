@@ -4,13 +4,15 @@
 #include <stdio.h>
 #include "colors.h"
 
-void kvilo_create_col(char *config_path, char *config_file) {
+void kvilo_create_col(char *config_path, char *config_file)
+{
 
-  char *col[sizeof(char*) * 2];
+  char *col[sizeof(char *) * 2];
   snprintf(col, sizeof(col), "%s%s", config_path, config_file);
-  
+
   FILE *fp = fopen(col, "w");
-  if (fp == NULL) {
+  if (fp == NULL)
+  {
     create_error(1, "SYSError: While Createing collection ...\n");
     exit(0);
   }

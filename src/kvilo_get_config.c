@@ -7,7 +7,7 @@
 
 #include "colors.h"
 
-char *getConfig(char *target_key, char *config_path, char *config_file) {
+char *get_config(char *target_key, char *config_path, char *config_file) {
 
 	char *line[1024];
 	char *search = "=";
