@@ -15,8 +15,17 @@ LUA_LIB := $(LUA_DIR)/install/lib/liblua.a
 
 FINAL_CFLAGS := -I./$(KVILO_INCS) -I./$(LUA_DIR)/src ./$(LUA_LIB)
 
+OS := $(shell uname -s | tr A-Z a-z)
+ifeq ($(OS), darwin)
+	LUA_PLATFORM := macosx
+endif 
+
+ifeq ($(OS), linux)
+	LUA_PLATFORM := linux
+endif
+
 lua:
-	cd $(LUA_DIR) && make local
+	cd $(LUA_DIR) && make $(LUA_PLATFORM) local
 
 prepare:
 	mkdir build
@@ -37,7 +46,7 @@ clean:
 	rm -rf $(BUILD_DIR)
 
 build:
-	make prepare && make lua && $(CC) -w $(SOURCE)/*.c $(FINAL_CFLAGS) -o $(BUILD_DIR)/$(BIN)
+	make prepare && make lua && $(CC) -w $(SOURCE)/*.c $(FINAL_CFLAGS) -o $(BUILD_DIR)/$(BIN)  -lm -ldl
 
 .PHONY:
 	build clean install_mac install_linux lua prepare
