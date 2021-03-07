@@ -1,5 +1,5 @@
 # ENV Manager
-Version: 1.0.0
+Version: 1.1.0
 
 
 [Documentation and Changelog](https://github.com/dkvilo/kvilo/blob/master/changelog.md)
