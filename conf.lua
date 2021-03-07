@@ -10,9 +10,14 @@ macro.message = "echo 'Pong'"
 boot = function()
 
   -- Register custom macro
-  -- if kvilo.arg1 == "ssh" and kvilo.arg2 == "tinyhoods" then
+  -- if kvilo.arg1 == "ssh" and kvilo.arg2 == "myserver" then
   --   return macro.ssh
   -- end
+
+  if kvilo.arg1 == "version" then
+    print("Kvilo Version:", kvilo.version)
+    return
+  end
 
   if kvilo.arg1 == "ping" then
     return macro.message

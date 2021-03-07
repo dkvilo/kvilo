@@ -1,7 +1,8 @@
 /*
 * David Kvilora <datokviloria@gmail.com>
 */
-void kvilo_help() {
+void kvilo_help()
+{
   printf("\n Usage: kvilo <action|macro> <?coll> <arg1> <arg2> <flag>\n\n");
   printf("\tinit        [-i]                    create collection\n");
   printf("\tinit        [-i]  [-f]              Force Init\n");
@@ -16,4 +17,4 @@ void kvilo_help() {
   printf("\texp-example [-ee]                   Export .env-example file\n");
   printf("\thelp        [-h]                    Help message\n");
   printf("\n\t/usr/bin/kvilo                    David Kviloria <dkvilo>\n\n");
-} 
+}

@@ -11,30 +11,36 @@
 #endif
 
 KVILO_UTIL_FUNC_TYPE
-unsigned short len(char *string) {
-	unsigned short i = 1;
-	while(string[i++]);
-	return i--;
+unsigned short len(char *string)
+{
+  unsigned short i = 1;
+  while (string[i++])
+    ;
+  return i--;
 }
 
 KVILO_UTIL_FUNC_TYPE
-char *substr(char *string, unsigned short from) {
+char *substr(char *string, unsigned short from)
+{
   char newStr[150];
-  for(unsigned short i; i < len(string) - from; i++)
-      newStr[i] = string[from + i];
+  for (unsigned short i; i < len(string) - from; i++)
+    newStr[i] = string[from + i];
   char *ret = newStr;
   return ret;
 }
 
 KVILO_UTIL_FUNC_TYPE
-void rmcfs(char* source, char target) {
+void rmcfs(char *source, char target)
+{
   char *i = source;
   char *j = source;
-  while(*j != 0) {
+  while (*j != 0)
+  {
     *i = *j++;
-    if(*i != target) {
+    if (*i != target)
+    {
       i++;
-		}
+    }
   }
   *i = 0;
 }

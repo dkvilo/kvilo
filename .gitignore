@@ -1,5 +1,10 @@
+/.vscode
 /build/
 /deps/lua-5.2.0/install
 /deps/.DS_Store
 /deps/lua-5.2.0/.DS_Store
+./deps/lua-5.2.0/src/lua
+./deps/lua-5.2.0/src/luac
+/deps/lua-5.2.0/src/*.a
+/deps/lua-5.2.0/src/*.o
 .DS_Store
