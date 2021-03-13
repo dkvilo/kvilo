@@ -4,6 +4,6 @@
 #ifndef KVILO_VERSION_H
 #define KVILO_VERSION_H
 
-#define VERSION "1.1.0"
+#define VERSION "1.1.2"
 
 #endif

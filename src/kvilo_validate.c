@@ -24,7 +24,7 @@ void kvilo_validate(const char *key, char *config_path, char *config_file, const
   */
   rmcfs(val, '\n');
 
-  printf("\n ENV Variable Validation! Collection: %s[%s]%s\n\n", KVILO_YELLOW, "master", KVILO_RESET);
+  printf("\n Variable Validation in Collection: %s[%s]%s\n\n", KVILO_YELLOW, config_file, KVILO_RESET);
 
   if (strcmp(val, from_cli) == 0)
   {
