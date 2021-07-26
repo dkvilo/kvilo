@@ -8,7 +8,7 @@ BIN := kvilo
 KVILO_HOME := ~/.kvilo
 
 KVILO_INCS := include
-DEPS_DIR := deps
+DEPS_DIR := vendor
 
 LUA_DIR := $(DEPS_DIR)/lua-5.2.0
 LUA_LIB := $(LUA_DIR)/install/lib/liblua.a
