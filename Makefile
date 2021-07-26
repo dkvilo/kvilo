@@ -10,7 +10,7 @@ KVILO_HOME := ~/.kvilo
 KVILO_INCS := include
 DEPS_DIR := vendor
 
-LUA_DIR := $(DEPS_DIR)/lua-5.2.0
+LUA_DIR := $(DEPS_DIR)/lua-5.2
 LUA_LIB := $(LUA_DIR)/install/lib/liblua.a
 
 FINAL_CFLAGS := -I./$(KVILO_INCS) -I./$(LUA_DIR)/src ./$(LUA_LIB)
