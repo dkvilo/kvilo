@@ -36,7 +36,7 @@ See detailed information on kvilo's [Wiki Page](https://github.com/dkvilo/kvilo/
 
 	init        [-i]                    Creates main collection
 	init        [-i]  [-f]              Recreates main collection
-    init        <col>                   Creates particular collection
+	init        <col>                   Creates particular collection
 
 
 	set         [-s]  <key>=<value>     Stores variable in particular collection - default main
